@@ -1,16 +1,14 @@
-import experienceReducer from "./experienceReducer";
-import { combineReducers } from "redux";
-import portofolioReducer from "./portofolioReducer";
-import skillReducer from "./skillReducer";
-import workerReducer from "./workerReducer";
-import recruiterReducer from "./recruiterReducer";
+import experienceReducer from './experienceReducer';
+import {combineReducers} from 'redux';
+import portofolioReducer from './portofolioReducer';
+import skillReducer from './skillReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
   experience: experienceReducer,
   portofolio: portofolioReducer,
   skill: skillReducer,
-  worker: workerReducer,
-  recruiter: recruiterReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

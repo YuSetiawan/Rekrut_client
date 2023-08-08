@@ -60,16 +60,16 @@ export default function Navbar() {
                   <Image src={Mail} alt="mail" />
                 </div>
                 <div>
-                  <DropdownButton variant="outline-secondary" title="Profile" id="segmented-button-dropdown-1">
+                  <DropdownButton variant="outline-secondary" title="Menu" id="segmented-button-dropdown-1">
                     <Dropdown.Item>
                       {' '}
-                      <Link href={`/profile/${id}`} style={{color: '#5e50a1'}}>
-                        Profile Detail
+                      <Link href={`/profileRecruiter/${id}`} style={{color: '#5e50a1'}}>
+                        Profile (Recruiter)
                       </Link>{' '}
                     </Dropdown.Item>
                     <Dropdown.Item>
                       {' '}
-                      <Link href={`/editProfile/${id}`} style={{color: '#5e50a1'}}>
+                      <Link href={`/editRecruiter/${id}`} style={{color: '#5e50a1'}}>
                         Edit Profile
                       </Link>{' '}
                     </Dropdown.Item>

@@ -197,7 +197,7 @@ export default function Home() {
           </div>
         </main>
         <div>
-          <h3 className="text-center mb-5">Their Opinion</h3>
+          <h3 className="text-center my-5">Their Opinion</h3>
           <div className="col-12 mb-5">
             <Carousell />
           </div>

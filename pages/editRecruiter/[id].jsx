@@ -1,5 +1,4 @@
 import Footer from '../../components/footer';
-import FormEdit from '../../components/editProfile/FormEdit';
 import Navbar from '../../components/navbar';
 // import React from 'react';
 import React, {useEffect, useState} from 'react';
@@ -11,8 +10,9 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
+import FormEditRecruiter from '../../components/editProfile/FormEditRecruiter';
 
-const EditProfile = () => {
+const EditProfileRecruiter = () => {
   const router = useRouter();
   const [login, setLogin] = useState();
   useEffect(() => {
@@ -36,7 +36,6 @@ const EditProfile = () => {
     id: {login},
     photo: '',
   });
-
   const [preview, setPreview] = useState(null);
   const [photo, setPhoto] = useState(null);
   const handleUpload = (e) => {
@@ -44,7 +43,12 @@ const EditProfile = () => {
     setPhoto(img);
     setPreview(URL.createObjectURL(img));
   };
-
+  const handleEditUser = (e) => {
+    setUserAction({
+      ...userAction,
+      [e.target.name]: e.target.value,
+    });
+  };
   const handleSubmitUserImg = (e) => {
     try {
       e.preventDefault();
@@ -171,7 +175,7 @@ const EditProfile = () => {
                     Edit Photo Profile
                   </button>
                 </form>
-                <Link href={`/profile/${login}`}>
+                <Link href={`/profileRecruiter/${login}`}>
                   <Button variant="outline-secondary" className="w-100 p-3">
                     Back to Profile
                   </Button>{' '}
@@ -181,7 +185,7 @@ const EditProfile = () => {
           </div>{' '}
           <div className="col-lg-8 col-12 ">
             <div className="p-3">
-              <FormEdit id={login} name={profiles.name} job_position={profiles.job_position} location={profiles.location} description={profiles.description} />
+              <FormEditRecruiter id={login} />
             </div>
           </div>
         </div>
@@ -191,4 +195,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfileRecruiter;

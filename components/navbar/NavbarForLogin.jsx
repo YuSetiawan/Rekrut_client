@@ -93,7 +93,9 @@ export default function Navbar() {
         <div className="container p-3">
           <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-              <Image src={Logo} alt="logo" />
+              <Link href="/">
+                <Image src={Logo} alt="logo" />
+              </Link>{' '}
               <div className="d-flex btn-navbar">
                 <Link href="/login">
                   <button className="button-home">Login</button>

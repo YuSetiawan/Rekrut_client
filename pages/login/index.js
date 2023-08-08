@@ -34,6 +34,7 @@ export default function Login() {
         });
         localStorage.setItem('token', res.data.data.token);
         localStorage.setItem('id', res.data.data.id);
+        localStorage.setItem('role', res.data.data.role);
         router.replace('/');
       })
       .catch((err) => {

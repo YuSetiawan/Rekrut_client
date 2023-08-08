@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image';
 import Banner1 from '../../public/image/first-lp.png';
 import Location from '../../public/image/location.png';
@@ -7,9 +7,31 @@ import Instagram from '../../public/image/instagram-icon.png';
 import Github from '../../public/image/github-icon.png';
 import Gitlab from '../../public/image/gitlab-icon.png';
 import Button from 'react-bootstrap/Button';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import axios from 'axios';
 // import Link from 'next/link';
 
 const SideProfile = () => {
+  const router = useRouter();
+  const {id} = router.query;
+
+  // GET ALL DATA
+  const [skills, setSkills] = useState([]);
+  const [experience, setExperience] = useState([]);
+  const [portofolio, setPortofolio] = useState([]);
+  useEffect(() => {
+    if (router.isReady) {
+      axios
+        .get(`http://localhost:4000/skill/profile/${id}`)
+        .then((response) => setSkills(response.data.data))
+        .catch((error) => console.log(error));
+      axios
+        .get(`http://localhost:4000/experience/profile/${id}`)
+        .then((response) => setExperience(response.data.data[0]))
+        .catch((error) => console.log(error));
+    }
+  }, [router.isReady]);
   return (
     <>
       <style jsx>{`
@@ -89,24 +111,11 @@ const SideProfile = () => {
             </p>
             <div className="mt-3">
               <h4 className="mb-4">Skills</h4>
-              <Button variant="warning" className="mb-2 mx-1">
-                JavaScript
-              </Button>
-              <Button variant="warning" className="mb-2 mx-1 ">
-                Golang
-              </Button>
-              <Button variant="warning" className="mb-2 mx-1 ">
-                Bootstrap
-              </Button>
-              <Button variant="warning" className="mb-2 mx-1 ">
-                Css
-              </Button>
-              <Button variant="warning" className="mb-2 mx-1 ">
-                Tailwind
-              </Button>
-              <Button variant="warning" className="mb-2 mx-1 ">
-                Bootstrap
-              </Button>
+              {skills.map((item) => (
+                <Button variant="warning" className="mb-2 mx-1">
+                  {item.skill_name}
+                </Button>
+              ))}
             </div>
             {/* <Link href={`editProfile/${profile.id}`}> */}
             <button className="button-home p-4 w-100 my-3">Hire</button>

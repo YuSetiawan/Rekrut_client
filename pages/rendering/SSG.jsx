@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image';
 import defaultPhoto from '../../public/image/user.png';
 import Location from '../../public/image/location.png';
@@ -11,7 +11,14 @@ import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Pagination from '../../components/pagination/pagination';
 
-const HomePage = () => {
+export async function getStaticProps() {
+  const res = await axios.get(`http://localhost:4000/user/profile`);
+  return {
+    props: {user: res.data.data},
+  };
+}
+
+const SSGHomePage = ({user}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(3);
   const [search, setSearch] = useState('');
@@ -19,16 +26,10 @@ const HomePage = () => {
   const handleSort = (option) => {
     setSortOption(option);
   };
-  const [profiles, setProfiles] = useState([]);
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/user/profile')
-      .then((response) => setProfiles(response.data.data))
-      .catch((error) => console.log(error));
-  }, []);
+
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = profiles.slice(firstPostIndex, lastPostIndex);
+  const currentPosts = user.slice(firstPostIndex, lastPostIndex);
   return (
     <>
       <style jsx>{`
@@ -125,9 +126,6 @@ const HomePage = () => {
               <Dropdown.Item as="button" onClick={() => handleSort('name_desc')}>
                 Name Z-A
               </Dropdown.Item>
-              <Dropdown.Item as="button" onClick={() => handleSort('job_asc')}>
-                Job A-Z
-              </Dropdown.Item>
             </DropdownButton>
             <button className="button-home p-4" type="submit">
               Search
@@ -148,8 +146,6 @@ const HomePage = () => {
                   return a.name.localeCompare(b.name);
                 case 'name_desc':
                   return b.name.localeCompare(a.name);
-                case 'job_asc':
-                  return a.job_position.localeCompare(b.job_position);
                 default:
                   return 0;
               }
@@ -180,11 +176,11 @@ const HomePage = () => {
                   </div>
                   <div className="col-md-2 col-12 mt-4 text-center">
                     {profile.role === 'worker' ? (
-                      <Link key={profile.id} href={`profile/${profile.id}`}>
+                      <Link key={profile.id} href={`/profile/${profile.id}`}>
                         <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
                       </Link>
                     ) : (
-                      <Link key={profile.id} href={`profileRecruiter/${profile.id}`}>
+                      <Link key={profile.id} href={`/profileRecruiter/${profile.id}`}>
                         <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
                       </Link>
                     )}
@@ -195,7 +191,7 @@ const HomePage = () => {
         </div>
         <div className="container">
           <div className="text-center">
-            <Pagination totalPosts={profiles.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+            <Pagination totalPosts={user.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
           </div>
         </div>
       </section>
@@ -204,4 +200,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default SSGHomePage;

@@ -11,34 +11,19 @@ import Email from '../../public/image/mail-icon.png';
 import Instagram from '../../public/image/instagram-icon.png';
 import Github from '../../public/image/github-icon.png';
 import Gitlab from '../../public/image/gitlab-icon.png';
-import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
 
-const Profile = () => {
+const ProfileRecruiter = () => {
   const router = useRouter();
   const {id} = router.query;
 
   // GET ALL DATA
   const [profiles, setProfiles] = useState([]);
-  const [skills, setSkills] = useState([]);
-  const [experience, setExperience] = useState([]);
-  const [portofolio, setPortofolio] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:4000/user/profile/${router.query.id}`)
+        .get(`http://localhost:4000/user/profile/${id}`)
         .then((response) => setProfiles(response.data.data[0]))
-        .catch((error) => console.log(error));
-      axios
-        .get(`http://localhost:4000/skill/profile/${id}`)
-        .then((response) => setSkills(response.data.data))
-        .catch((error) => console.log(error));
-      axios
-        .get(`http://localhost:4000/experience/profile/${id}`)
-        .then((response) => setExperience(response.data.data))
-        .catch((error) => console.log(error));
-      axios
-        .get(`http://localhost:4000/portofolio/profile/${id}`)
-        .then((response) => setPortofolio(response.data.data))
         .catch((error) => console.log(error));
     }
   }, [router.isReady]);
@@ -104,42 +89,34 @@ const Profile = () => {
         }
         .purpleBg {
           background-color: #5e50a1;
-          height: 30vh;
+          height: 48vh;
         }
       `}</style>
       <Navbar />
       <div className="purpleBg"></div>
-      <div className="container" style={{marginTop: -120}}>
-        <div className="row mb-5">
-          <div className="col-lg-4 col-12">
+      <div className="container" style={{marginTop: -210}}>
+        <div className="mb-5">
+          <div className="col-12">
             <div className="card p-2 mb-4 shadow">
               {!profiles.photo ? (
                 <Image src={profImg} className="m-auto my-3" height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
               ) : (
                 <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%'}} />
               )}
-              <div className="card-body">
-                <h3>{profiles.name}</h3>
+              <div className="card-body text-center">
+                <h3>{profiles.company_name}</h3>
                 <h5>{profiles.job_position}</h5>
-                <p>{profiles.phone}</p>
-                <div className="d-flex mt-3">
-                  <div className="location col-1">
-                    <Image src={Location} alt="location" className="mb-1" />
+                <p>{profiles.name}</p>
+                <div className="d-flex">
+                  <div className=" m-auto col-12">
+                    <Image src={Location} alt="location" className="mb-1 " />
+                    <>{!profiles.location ? <p className="m-0">Location not added</p> : profiles.location}</>
                   </div>
-                  <p>{profiles.location}</p>
                 </div>
                 <p className="descriptionWorker mb-4">{profiles.description}</p>
-                <div className="mt-3">
-                  <h4 className="mb-4">Skills</h4>
-                  {skills.map((item) => (
-                    <Button variant="warning" className="mb-2 mx-1">
-                      {item.skill_name}
-                    </Button>
-                  ))}
-                </div>
-                {/* <Link href={`editProfile/${profile.id}`}> */}
-                <button className="button-home p-4 w-100 my-3">Hire</button>
-                {/* </Link> */}
+                <Link href={`/home`}>
+                  <button className="button-home p-4 w-100 my-3">Hiring</button>
+                </Link>
                 <div>
                   <div className="d-flex my-3">
                     <div className="location col-2">
@@ -169,55 +146,6 @@ const Profile = () => {
               </div>
             </div>
           </div>{' '}
-          <div className="col-lg-8 col-12">
-            <div className="card p-3 shadow">
-              <>
-                <nav>
-                  <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button className="nav-link active" id="nav-Portofolio-tab" data-bs-toggle="tab" data-bs-target="#nav-Portofolio" type="button" role="tab" aria-controls="nav-Portofolio" aria-selected="true">
-                      <h4>Portofolio</h4>
-                    </button>
-                    <button className="nav-link" id="nav-Experience-tab" data-bs-toggle="tab" data-bs-target="#nav-Experience" type="button" role="tab" aria-controls="nav-Experience" aria-selected="false">
-                      <h4>Experience</h4>
-                    </button>
-                  </div>
-                </nav>
-                <div className="tab-content" id="nav-tabContent">
-                  <div className="tab-pane fade show active p-3" id="nav-Portofolio" role="tabpanel" aria-labelledby="nav-Portofolio-tab">
-                    <div className="row p-lg-0 p-4">
-                      {portofolio.map((item) => (
-                        <div className="col-lg-4 col-12 my-2 text-center">
-                          <Image src={item.photo} alt="portImg" height={150} width={220} className="m-auto m-lg-0 mt-3" />
-                          <div className="card-body">
-                            <h3 className="card-title">{item.name}</h3>
-                            <h5 className="card-text">{item.repository}</h5>{' '}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="tab-pane fade p-3" id="nav-Experience" role="tabpanel" aria-labelledby="nav-Experience-tab">
-                    <div>
-                      {experience.map((item) => (
-                        <div className="card container my-3">
-                          <div className="row p-3">
-                            <div className="col-12">
-                              <h3 className="card-title">{item.job_position}</h3>
-                              <h5 className="card-text">{item.company_name}</h5>
-                              <p className="mt-3">
-                                <i>from</i> {item.working_started} <i>to</i> {item.working_ended}
-                              </p>
-                              <p className="description">{item.description}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </>
-            </div>
-          </div>
         </div>
       </div>
       <Footer />
@@ -225,4 +153,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileRecruiter;
