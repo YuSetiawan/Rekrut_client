@@ -154,8 +154,8 @@ const HomePage = () => {
                   return 0;
               }
             })
-            .map((profile) => (
-              <div className="card mb-3">
+            .map((profile, index) => (
+              <div className="card mb-3" key={index}>
                 <div className="row g-0">
                   <div className="col-md-3 col-12 p-3 d-flex justify-content-center">
                     {!profile.photo ? <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} /> : <Image src={profile.photo} height={200} width={200} alt="avatar" style={{borderRadius: '50%'}} />}
@@ -171,8 +171,8 @@ const HomePage = () => {
                         </div>
                         <span>{!profile.location ? <p className="m-0">Location not added</p> : profile.location}</span>
                       </div>
-                      {profile.skills.map((item) => (
-                        <Button variant="warning" className="mb-2 mx-1">
+                      {profile.skills.map((item, index) => (
+                        <Button variant="warning" className="mb-2 mx-1" key={index}>
                           {!item ? <p className="m-0 text-white">Skills not added </p> : item}
                         </Button>
                       ))}

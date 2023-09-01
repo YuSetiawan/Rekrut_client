@@ -61,8 +61,8 @@ export default function Carousell() {
         className="mySwipe"
       >
         <div className="container">
-          {profiles.map((item) => (
-            <SwiperSlide className="shadow">
+          {profiles.map((item, index) => (
+            <SwiperSlide className="shadow" key={index}>
               <Card>
                 <div className="d-flex justify-content-center m-4">
                   {!item.photo ? <Image src={userImg} height="250" width="250" alt="avatar" style={{borderRadius: '50%'}} /> : <Image src={item.photo} height={250} width={250} alt="avatar" style={{borderRadius: '50%'}} />}

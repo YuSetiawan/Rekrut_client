@@ -29,6 +29,7 @@ const EditProfileRecruiter = () => {
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // POST & PUT DATA

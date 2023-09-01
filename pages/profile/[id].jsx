@@ -41,6 +41,7 @@ const Profile = () => {
         .then((response) => setPortofolio(response.data.data))
         .catch((error) => console.log(error));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
   return (
     <>
@@ -193,8 +194,8 @@ const Profile = () => {
                 <div className="tab-content" id="nav-tabContent">
                   <div className="tab-pane fade show active p-3" id="nav-Portofolio" role="tabpanel" aria-labelledby="nav-Portofolio-tab">
                     <div className="row p-lg-0 p-4">
-                      {portofolio.map((item) => (
-                        <div className="col-lg-4 col-12 my-2 text-center">
+                      {portofolio.map((item, index) => (
+                        <div className="col-lg-4 col-12 my-2 text-center" key={index}>
                           <Image src={item.photo} alt="portImg" height={150} width={220} className="m-auto m-lg-0 mt-3" />
                           <div className="card-body">
                             <h3 className="card-title">{item.name}</h3>
@@ -206,8 +207,8 @@ const Profile = () => {
                   </div>
                   <div className="tab-pane fade p-3" id="nav-Experience" role="tabpanel" aria-labelledby="nav-Experience-tab">
                     <div>
-                      {experience.map((item) => (
-                        <div className="card container my-3">
+                      {experience.map((item, index) => (
+                        <div className="card container my-3" key={index}>
                           <div className="row p-3">
                             <div className="col-12">
                               <h3 className="card-title">{item.job_position}</h3>

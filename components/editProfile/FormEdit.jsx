@@ -33,6 +33,7 @@ const FormEdit = ({name, job_position, location, description}) => {
       dispatch(getExperienceUser(login));
       dispatch(getPortofolioUser(login));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // POST & PUT DATA
@@ -242,8 +243,8 @@ const FormEdit = ({name, job_position, location, description}) => {
         <div class="card-header my-2">
           <h3>Experience</h3>
         </div>
-        {experienceUser.map((item) => (
-          <div className="card container my-3">
+        {experienceUser.map((item, index) => (
+          <div className="card container my-3" key={index}>
             <div className="row p-3">
               <div className="col-lg-9 col-12">
                 <h3 className="card-title">{item.job_position}</h3>
@@ -307,8 +308,8 @@ const FormEdit = ({name, job_position, location, description}) => {
           <h3>Portofolio</h3>
         </div>
         <div className="m-1">
-          {portofolioUser.map((item) => (
-            <div className="card container my-3">
+          {portofolioUser.map((item, index) => (
+            <div className="card container my-3" key={index}>
               <div className="row p-3">
                 <div className="col-lg-8 col-md-12">
                   <h3 className="card-title">{item.name}</h3>

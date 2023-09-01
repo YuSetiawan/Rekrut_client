@@ -30,6 +30,7 @@ const SideProfile = () => {
         .then((response) => setExperience(response.data.data[0]))
         .catch((error) => console.log(error));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
   return (
     <>
@@ -110,8 +111,8 @@ const SideProfile = () => {
             </p>
             <div className="mt-3">
               <h4 className="mb-4">Skills</h4>
-              {skills.map((item) => (
-                <Button variant="warning" className="mb-2 mx-1">
+              {skills.map((item, index) => (
+                <Button variant="warning" className="mb-2 mx-1" key={index}>
                   {item.skill_name}
                 </Button>
               ))}
