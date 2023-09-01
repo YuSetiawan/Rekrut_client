@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 export const getAllUser = () => async (dispatch) => {
   try {
-    const users = await axios.get(`http://localhost:4000/user/profile`);
+    const users = await axios.get(`https://rekrut-server.vercel.app/user/profile`);
     const result = users.data.data;
     dispatch({type: 'GET_ALL_USER', payload: result});
   } catch (err) {
@@ -13,7 +13,7 @@ export const getAllUser = () => async (dispatch) => {
 
 export const editUser = (login, userAction) => async (dispatch) => {
   try {
-    const users = await axios.put(`http://localhost:4000/user/profile/${login}`, userAction);
+    const users = await axios.put(`https://rekrut-server.vercel.app/user/profile/${login}`, userAction);
     const result = users.data.data[0];
     console.log(result);
     if (users.data.statusCode === 200) {
@@ -35,7 +35,7 @@ export const editPhotoUser = (id, photo) => async (dispatch) => {
   try {
     const formData = new FormData();
     formData.append('wrk_photo', photo);
-    const workers = await axios.put(`http://localhost:4000/user/profile/${id}`, formData);
+    const workers = await axios.put(`https://rekrut-server.vercel.app/user/profile/${id}`, formData);
     const result = workers.data.data[0];
     console.log(result);
     window.location.reload();

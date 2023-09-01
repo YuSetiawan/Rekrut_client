@@ -22,7 +22,7 @@ const ProfileRecruiter = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:4000/user/profile/${id}`)
+        .get(`https://rekrut-server.vercel.app/user/profile/${id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }

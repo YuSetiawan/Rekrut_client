@@ -12,6 +12,7 @@ import {createExperience, getExperienceUser} from '../../configs/redux/actions/e
 import {createSkill, getSkillUser} from '../../configs/redux/actions/skillActions';
 import {createPortofolio, getPortofolioUser} from '../../configs/redux/actions/portofolioAction';
 import {editUser} from '../../configs/redux/actions/userAction';
+import {Toaster} from 'react-hot-toast';
 
 const FormEdit = ({name, job_position, location, description}) => {
   const dispatch = useDispatch();
@@ -174,7 +175,7 @@ const FormEdit = ({name, job_position, location, description}) => {
         }
       `}</style>
       <form className="card row g-3 mb-5 p-3 shadow" onSubmit={handlePutUser}>
-        <div class="card-header">
+        <div className="card-header">
           <h3>Personal data</h3>
         </div>
         <div className="col-12">
@@ -349,6 +350,7 @@ const FormEdit = ({name, job_position, location, description}) => {
             </button>
           </div>{' '}
         </form>
+        <Toaster />
       </section>
     </>
   );

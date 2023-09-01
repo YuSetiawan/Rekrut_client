@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 import Pagination from '../../components/pagination/pagination';
 
 export async function getStaticProps() {
-  const res = await axios.get(`http://localhost:4000/user/profile`);
+  const res = await axios.get(`https://rekrut-server.vercel.app/user/profile`);
   return {
     props: {user: res.data.data},
   };

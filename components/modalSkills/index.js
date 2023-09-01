@@ -2,21 +2,17 @@ import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {deleteSkill} from '../../configs/redux/actions/skillActions';
 
 function DeleteSkill({id}) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .delete(`http://localhost:4000/skill/${id}`)
-      .then((response) => {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch((error) => console.log(error));
+  const handleSubmit = () => {
+    dispatch(deleteSkill(id, setShow));
   };
 
   return (

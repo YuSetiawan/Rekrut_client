@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import {toast} from 'react-hot-toast';
 
 export const getSkillUser = (login) => async (dispatch) => {
   try {
-    const skills = await axios.get(`http://localhost:4000/skill/profile/${login}`);
+    const skills = await axios.get(`https://rekrut-server.vercel.app/skill/profile/${login}`);
     const result = skills.data.data;
     dispatch({type: 'GET_ALL_SKILL_USER', payload: result});
   } catch (err) {
@@ -13,10 +13,10 @@ export const getSkillUser = (login) => async (dispatch) => {
 
 export const createSkill = (skillAction) => async (dispatch) => {
   try {
-    const skills = await axios.post(`http://localhost:4000/skill/`, skillAction);
-    Swal.fire({
-      icon: 'success',
-      title: 'Create Skills Success',
+    const skills = await axios.post(`https://rekrut-server.vercel.app/skill/`, skillAction);
+    toast.success('Skill Added', {
+      duration: 1500,
+      position: 'top-center',
     });
     setTimeout(function () {
       window.location.reload(1);
@@ -24,18 +24,22 @@ export const createSkill = (skillAction) => async (dispatch) => {
     const result = skills.data.data;
     dispatch({type: 'CREATE_SKILL', payload: result});
   } catch (err) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Create Skills failed',
+    toast.error('Submit skills incorrect', {
+      duration: 1500,
+      position: 'top-center',
     });
   }
 };
 
 export const deleteSkill = (id, setShow) => async (dispatch) => {
   try {
-    const skills = await axios.delete(`http://localhost:4000/skill/profile/${id}`);
+    const skills = await axios.delete(`https://rekrut-server.vercel.app/skill/${id}`);
     const result = skills.data.data;
     setShow(false);
+    toast.success('Skill Deleted', {
+      duration: 1500,
+      position: 'top-center',
+    });
     dispatch({type: 'DELETE_SKILL', payload: result});
     window.location.reload();
   } catch (err) {

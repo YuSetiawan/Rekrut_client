@@ -13,7 +13,7 @@ import Pagination from '../../components/pagination/pagination';
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(3);
+  const [postsPerPage] = useState(5);
   const [search, setSearch] = useState('');
   const [sortOption, setSortOption] = useState('');
   const handleSort = (option) => {
@@ -22,7 +22,7 @@ const HomePage = () => {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/profile')
+      .get('https://rekrut-server.vercel.app/user/profile')
       .then((response) => setProfiles(response.data.data))
       .catch((error) => console.log(error));
   }, []);
@@ -117,7 +117,7 @@ const HomePage = () => {
       <section>
         <div className="container my-5">
           <div className="input-group mb-3">
-            <input type="text" className="form-control p-2" placeholder="Search for any Skill" onChange={(e) => setSearch(e.target.value)} />
+            <input type="text" className="form-control p-2" placeholder="Search for a person or profession" onChange={(e) => setSearch(e.target.value)} />
             <DropdownButton variant="outline-secondary" id="dropdown-item-button" title="Category" className="d-flex align-item-bottom">
               <Dropdown.Item as="button" onClick={() => handleSort('name_asc')}>
                 Name A-Z
@@ -140,7 +140,7 @@ const HomePage = () => {
         <div className="container ">
           {currentPosts
             .filter((item) => {
-              return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search);
+              return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search) || item.job_position.toLowerCase().includes(search);
             })
             .sort((a, b) => {
               switch (sortOption) {

@@ -25,19 +25,19 @@ const Profile = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:4000/user/profile/${router.query.id}`)
+        .get(`https://rekrut-server.vercel.app/user/profile/${router.query.id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
       axios
-        .get(`http://localhost:4000/skill/profile/${id}`)
+        .get(`https://rekrut-server.vercel.app/skill/profile/${id}`)
         .then((response) => setSkills(response.data.data))
         .catch((error) => console.log(error));
       axios
-        .get(`http://localhost:4000/experience/profile/${id}`)
+        .get(`https://rekrut-server.vercel.app/experience/profile/${id}`)
         .then((response) => setExperience(response.data.data))
         .catch((error) => console.log(error));
       axios
-        .get(`http://localhost:4000/portofolio/profile/${id}`)
+        .get(`https://rekrut-server.vercel.app/portofolio/profile/${id}`)
         .then((response) => setPortofolio(response.data.data))
         .catch((error) => console.log(error));
     }
@@ -126,15 +126,23 @@ const Profile = () => {
                   <div className="location col-1">
                     <Image src={Location} alt="location" className="mb-1" />
                   </div>
-                  <p>{profiles.location}</p>
+                  {!profiles.location ? <p>Location have not been added </p> : <p>{profiles.location}</p>}
                 </div>
                 <p className="descriptionWorker mb-4">{profiles.description}</p>
                 <div className="mt-3">
                   <h4 className="mb-4">Skills</h4>
                   {skills.map((item) => (
-                    <Button variant="warning" className="mb-2 mx-1">
-                      {item.skill_name}
-                    </Button>
+                    <>
+                      {!item.skill_name ? (
+                        <Button variant="warning" className="mb-2 mx-1">
+                          Skills have not been added{' '}
+                        </Button>
+                      ) : (
+                        <Button variant="warning" className="mb-2 mx-1">
+                          {item.skill_name}
+                        </Button>
+                      )}
+                    </>
                   ))}
                 </div>
                 {/* <Link href={`editProfile/${profile.id}`}> */}

@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Logo from '../../public/image/white-logo.png';
 import Background from '../../public/image/Auth-image.png';
 import {Fragment, useState} from 'react';
-import Swal from 'sweetalert2';
 import {useRouter} from 'next/router';
 import axios from 'axios';
+import {Toaster, toast} from 'react-hot-toast';
 
 export default function Register() {
   const router = useRouter();
@@ -45,20 +45,19 @@ export default function Register() {
       return;
     }
     axios
-      .post('http://localhost:4000/user/register', form)
+      .post('https://rekrut-server.vercel.app/user/register', form)
       .then((res) => {
-        Swal.fire({
-          text: res.data.message,
-          icon: 'success',
+        toast.success(res.data.message, {
+          duration: 1500,
+          position: 'top-center',
         });
         router.replace('/login');
       })
       .catch((error) => {
         console.log(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Register Failed',
-          text: 'Input all of form data!',
+        toast.error(error.data.message, {
+          duration: 1500,
+          position: 'top-center',
         });
       });
   };
@@ -138,7 +137,9 @@ export default function Register() {
               <div className="leftSide">
                 <div className="row">
                   <div className="col p-3 logo">
-                    <Image src={Logo} alt="logo" width="100" />
+                    <Link href="/">
+                      <Image src={Logo} alt="logo" width="100" />
+                    </Link>{' '}
                   </div>
                 </div>
                 <div className="title d-flex justify-content-center align-items-center">
@@ -157,7 +158,7 @@ export default function Register() {
                   <form onSubmit={handleSubmit}>
                     <div>
                       <label htmlFor="name">Full Name</label>
-                      <input type="text" className="form-control mt-1" placeholder="Input Full name" id="name" name="name" onChange={handleChange} />
+                      <input type="text" className="form-control mt-1" placeholder="Input Full name" id="name" name="name" onChange={handleChange} required="Input your fullname" />
                     </div>
                     <div className="mt-3">
                       <label htmlFor="email">Email</label>
@@ -189,6 +190,7 @@ export default function Register() {
           </div>
         </main>
       </div>
+      <Toaster />
     </Fragment>
   );
 }

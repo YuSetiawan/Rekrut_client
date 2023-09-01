@@ -1,7 +1,6 @@
 import Footer from '../../components/footer';
 import FormEdit from '../../components/editProfile/FormEdit';
 import Navbar from '../../components/navbar';
-// import React from 'react';
 import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Image from 'next/image';
@@ -10,7 +9,7 @@ import Location from '../../public/image/location.png';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Link from 'next/link';
-import Swal from 'sweetalert2';
+import {Toaster, toast} from 'react-hot-toast';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -25,7 +24,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:4000/user/profile/${router.query.id}`)
+        .get(`https://rekrut-server.vercel.app/user/profile/${router.query.id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }
@@ -52,23 +51,23 @@ const EditProfile = () => {
       if (photo) {
         formData.append('photo', photo);
       }
-      axios.put(`http://localhost:4000/user/profilephoto/${router.query.id}`, formData, {
+      axios.put(`https://rekrut-server.vercel.app/user/profilephoto/${router.query.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      Swal.fire({
-        icon: 'success',
-        title: 'Update Profile Photo Success',
+      toast.success('Update photo profile succes', {
+        duration: 1500,
+        position: 'top-center',
       });
       setTimeout(function () {
         window.location.reload();
       }, 1000);
     } catch (error) {
       console.log(error.message);
-      Swal.fire({
-        icon: 'error',
-        title: 'Update Profile Photo failed',
+      toast.error('Update photo failed', {
+        duration: 1500,
+        position: 'top-center',
       });
     }
   };
@@ -186,6 +185,7 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
+      <Toaster />
       <Footer />
     </>
   );

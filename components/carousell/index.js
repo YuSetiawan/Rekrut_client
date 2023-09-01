@@ -13,7 +13,7 @@ export default function Carousell() {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/profile')
+      .get('https://rekrut-server.vercel.app/user/profile')
       .then((response) => setProfiles(response.data.data))
       .catch((error) => console.log(error));
   }, []);
@@ -75,39 +75,6 @@ export default function Carousell() {
               </Card>
             </SwiperSlide>
           ))}
-          {/* <SwiperSlide className="shadow">
-            <Card>
-              <div className="d-flex justify-content-center m-4">
-                <Image src={userImg} className="m-auto" alt="userImg" style={{height: 250, width: 250, borderRadius: '50%', objectFit: 'cover', marginLeft: 1000}} />
-              </div>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>Some quick example text to build on the card title and make up the bulk of the cards content.</Card.Text>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide className="shadow">
-            <Card>
-              <div className="d-flex justify-content-center m-4">
-                <Image src={userImg} className="m-auto" alt="userImg" style={{height: 250, width: 250, borderRadius: '50%', objectFit: 'cover', marginLeft: 1000}} />
-              </div>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>Some quick example text to build on the card title and make up the bulk of the cards content.</Card.Text>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide className="shadow">
-            <Card>
-              <div className="d-flex justify-content-center m-4">
-                <Image src={userImg} className="m-auto" alt="userImg" style={{height: 250, width: 250, borderRadius: '50%', objectFit: 'cover', marginLeft: 1000}} />
-              </div>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>Some quick example text to build on the card title and make up the bulk of the cards content.</Card.Text>
-              </Card.Body>
-            </Card>
-          </SwiperSlide> */}
         </div>
       </Swiper>
     </>

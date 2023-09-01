@@ -19,7 +19,6 @@ const SideProfile = () => {
   // GET ALL DATA
   const [skills, setSkills] = useState([]);
   const [experience, setExperience] = useState([]);
-  const [portofolio, setPortofolio] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       axios

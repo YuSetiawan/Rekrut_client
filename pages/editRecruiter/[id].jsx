@@ -25,7 +25,7 @@ const EditProfileRecruiter = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`http://localhost:4000/user/profile/${router.query.id}`)
+        .get(`https://rekrut-server.vercel.app/user/profile/${router.query.id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }
@@ -56,7 +56,7 @@ const EditProfileRecruiter = () => {
       if (photo) {
         formData.append('photo', photo);
       }
-      axios.put(`http://localhost:4000/user/profilephoto/${router.query.id}`, formData, {
+      axios.put(`https://rekrut-server.vercel.app/user/profilephoto/${router.query.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

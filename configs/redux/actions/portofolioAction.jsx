@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import {toast} from 'react-hot-toast';
 
 export const getPortofolioUser = (login) => async (dispatch) => {
   try {
-    const portofolios = await axios.get(`http://localhost:4000/portofolio/profile/${login}`);
+    const portofolios = await axios.get(`https://rekrut-server.vercel.app/portofolio/profile/${login}`);
     const result = portofolios.data.data;
     dispatch({type: 'GET_ALL_PORTOFOLIO_USER', payload: result});
   } catch (err) {
@@ -20,14 +20,14 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
     if (photo) {
       formData.append('photo', photo);
     }
-    const portofolios = await axios.post(`http://localhost:4000/portofolio/`, formData, {
+    const portofolios = await axios.post(`https://rekrut-server.vercel.app/portofolio/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    Swal.fire({
-      icon: 'success',
-      title: 'Create Portofolio Success',
+    toast.success('Portofolio Created', {
+      duration: 1500,
+      position: 'top-center',
     });
     setTimeout(function () {
       window.location.reload();
@@ -37,18 +37,22 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
     window.location.reload();
   } catch (err) {
     console.log(err.message);
-    Swal.fire({
-      icon: 'error',
-      title: 'Create Portofolio failed',
+    toast.error('Create Portofolio Failed', {
+      duration: 1500,
+      position: 'top-center',
     });
   }
 };
 
 export const deletePortofolio = (id, setShow) => async (dispatch) => {
   try {
-    const portofolios = await axios.delete(`http://localhost:4000/portofolio/${id}`);
+    const portofolios = await axios.delete(`https://rekrut-server.vercel.app/portofolio/${id}`);
     const result = portofolios.data.data;
     setShow(false);
+    toast.success('Portofolio Deleted', {
+      duration: 1500,
+      position: 'top-center',
+    });
     dispatch({type: 'DELETE_PORTOFOLIO', payload: result});
     window.location.reload();
   } catch (err) {
@@ -64,24 +68,24 @@ export const updatePortofolio = (id, portoAction, photo, setShow) => async (disp
     if (photo) {
       formData.append('photo', photo);
     }
-    axios.put(`http://localhost:4000/portofolio/${id}`, formData, {
+    axios.put(`https://rekrut-server.vercel.app/portofolio/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
     setShow(false);
-    Swal.fire({
-      icon: 'success',
-      title: 'Edit Portofolio Success',
+    toast.success('Portofolio Updated', {
+      duration: 1500,
+      position: 'top-center',
     });
     setTimeout(function () {
       window.location.reload();
     }, 1000);
   } catch (err) {
     console.log(err.message);
-    Swal.fire({
-      icon: 'error',
-      title: 'Edit Portofolio failed',
+    toast.error('Update Portofolio Failed', {
+      duration: 1500,
+      position: 'top-center',
     });
   }
 };

@@ -4,8 +4,8 @@ import Logo from '../../public/image/white-logo.png';
 import Background from '../../public/image/Auth-image.png';
 import {Fragment, useState} from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import {useRouter} from 'next/router';
+import {Toaster, toast} from 'react-hot-toast';
 
 export default function Login() {
   const router = useRouter();
@@ -25,12 +25,11 @@ export default function Login() {
   let onClick = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:4000/user/login', data)
+      .post('https://rekrut-server.vercel.app/user/login', data)
       .then((res) => {
-        Swal.fire({
-          title: 'Login Succesful',
-          text: 'Now you can surf the website!',
-          icon: 'success',
+        toast.success('Log in Successfull!', {
+          duration: 1500,
+          position: 'top-center',
         });
         localStorage.setItem('token', res.data.data.token);
         localStorage.setItem('id', res.data.data.id);
@@ -39,10 +38,9 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: 'Email/Password invalid!',
+        toast.error('Email/Password incorrect', {
+          duration: 1500,
+          position: 'top-center',
         });
       });
   };
@@ -122,7 +120,9 @@ export default function Login() {
               <div className="leftSide">
                 <div className="row">
                   <div className="col p-3 logo">
-                    <Image src={Logo} alt="logo" width="100" />
+                    <Link href="/">
+                      <Image src={Logo} alt="logo" width="100" />
+                    </Link>{' '}
                   </div>
                 </div>
                 <div className="title d-flex justify-content-center align-items-center">
@@ -166,6 +166,7 @@ export default function Login() {
           </div>
         </main>
       </div>
+      <Toaster />
     </Fragment>
   );
 }

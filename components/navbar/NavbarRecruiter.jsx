@@ -7,6 +7,7 @@ import Bell from '../../public/image/bell.png';
 import Mail from '../../public/image/mail.png';
 import {useRouter} from 'next/router';
 import HamburgerIcon from '../hamburgerIcon';
+import {toast} from 'react-hot-toast';
 
 export default function Navbar() {
   const router = useRouter();
@@ -14,6 +15,10 @@ export default function Navbar() {
 
   const logOut = () => {
     localStorage.clear();
+    toast.success('Log out Succesfull', {
+      duration: 1500,
+      position: 'top-center',
+    });
     router.replace('/login');
   };
 
