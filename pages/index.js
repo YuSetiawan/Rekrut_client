@@ -107,7 +107,7 @@ export default function Home() {
           <div className="row mt-5 pt-5 ">
             <div className="col-md-6 d-flex align-items-center">
               <div>
-                <h1>The nation's best talent for revolutionary change 4.0</h1>
+                <h1>The nation&apos;s best talent for revolutionary change 4.0</h1>
                 <p>Find professional experts in all fields of industry on this site</p>
                 <Link href="/home">
                   <button className="button-home">START FROM HERE</button>
