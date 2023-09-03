@@ -25,6 +25,7 @@ const HomePage = () => {
       .get('https://zany-ruby-whale-veil.cyclic.app/user/profile')
       .then((response) => setProfiles(response.data.data))
       .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
