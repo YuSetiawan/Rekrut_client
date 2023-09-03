@@ -3,7 +3,7 @@ import {toast} from 'react-hot-toast';
 
 export const getSkillUser = (login) => async (dispatch) => {
   try {
-    const skills = await axios.get(`https://rekrut-server.vercel.app/skill/profile/${login}`);
+    const skills = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/skill/profile/${login}`);
     const result = skills.data.data;
     dispatch({type: 'GET_ALL_SKILL_USER', payload: result});
   } catch (err) {
@@ -13,7 +13,7 @@ export const getSkillUser = (login) => async (dispatch) => {
 
 export const createSkill = (skillAction) => async (dispatch) => {
   try {
-    const skills = await axios.post(`https://rekrut-server.vercel.app/skill/`, skillAction);
+    const skills = await axios.post(`https://zany-ruby-whale-veil.cyclic.app/skill/`, skillAction);
     toast.success('Skill Added', {
       duration: 1500,
       position: 'top-center',
@@ -33,7 +33,7 @@ export const createSkill = (skillAction) => async (dispatch) => {
 
 export const deleteSkill = (id, setShow) => async (dispatch) => {
   try {
-    const skills = await axios.delete(`https://rekrut-server.vercel.app/skill/${id}`);
+    const skills = await axios.delete(`https://zany-ruby-whale-veil.cyclic.app/skill/${id}`);
     const result = skills.data.data;
     setShow(false);
     toast.success('Skill Deleted', {

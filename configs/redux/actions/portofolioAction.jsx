@@ -3,7 +3,7 @@ import {toast} from 'react-hot-toast';
 
 export const getPortofolioUser = (login) => async (dispatch) => {
   try {
-    const portofolios = await axios.get(`https://rekrut-server.vercel.app/portofolio/profile/${login}`);
+    const portofolios = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/portofolio/profile/${login}`);
     const result = portofolios.data.data;
     dispatch({type: 'GET_ALL_PORTOFOLIO_USER', payload: result});
   } catch (err) {
@@ -20,7 +20,7 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
     if (photo) {
       formData.append('photo', photo);
     }
-    const portofolios = await axios.post(`https://rekrut-server.vercel.app/portofolio/`, formData, {
+    const portofolios = await axios.post(`https://zany-ruby-whale-veil.cyclic.app/portofolio/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -46,7 +46,7 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
 
 export const deletePortofolio = (id, setShow) => async (dispatch) => {
   try {
-    const portofolios = await axios.delete(`https://rekrut-server.vercel.app/portofolio/${id}`);
+    const portofolios = await axios.delete(`https://zany-ruby-whale-veil.cyclic.app/portofolio/${id}`);
     const result = portofolios.data.data;
     setShow(false);
     toast.success('Portofolio Deleted', {
@@ -68,7 +68,7 @@ export const updatePortofolio = (id, portoAction, photo, setShow) => async (disp
     if (photo) {
       formData.append('photo', photo);
     }
-    axios.put(`https://rekrut-server.vercel.app/portofolio/${id}`, formData, {
+    axios.put(`https://zany-ruby-whale-veil.cyclic.app/portofolio/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

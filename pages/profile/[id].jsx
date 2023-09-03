@@ -25,19 +25,19 @@ const Profile = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`https://rekrut-server.vercel.app/user/profile/${router.query.id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${router.query.id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
       axios
-        .get(`https://rekrut-server.vercel.app/skill/profile/${id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/skill/profile/${id}`)
         .then((response) => setSkills(response.data.data))
         .catch((error) => console.log(error));
       axios
-        .get(`https://rekrut-server.vercel.app/experience/profile/${id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/experience/profile/${id}`)
         .then((response) => setExperience(response.data.data))
         .catch((error) => console.log(error));
       axios
-        .get(`https://rekrut-server.vercel.app/portofolio/profile/${id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/portofolio/profile/${id}`)
         .then((response) => setPortofolio(response.data.data))
         .catch((error) => console.log(error));
     }
@@ -117,7 +117,7 @@ const Profile = () => {
               {!profiles.photo ? (
                 <Image src={profImg} className="m-auto my-3" height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
               ) : (
-                <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%'}} />
+                <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
               )}
               <div className="card-body">
                 <h3>{profiles.name}</h3>

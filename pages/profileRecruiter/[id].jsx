@@ -22,7 +22,7 @@ const ProfileRecruiter = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`https://rekrut-server.vercel.app/user/profile/${id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }
@@ -102,7 +102,7 @@ const ProfileRecruiter = () => {
               {!profiles.photo ? (
                 <Image src={profImg} className="m-auto my-3" height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
               ) : (
-                <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%'}} />
+                <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
               )}
               <div className="card-body text-center">
                 <h3>{profiles.company_name}</h3>

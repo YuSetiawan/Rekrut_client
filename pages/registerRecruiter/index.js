@@ -48,7 +48,7 @@ export default function RegisterRecruiter() {
       return;
     }
     axios
-      .post('https://rekrut-server.vercel.app/user/registerRecruiter', form)
+      .post('https://zany-ruby-whale-veil.cyclic.app/user/registerRecruiter', form)
       .then((res) => {
         toast.success(res.data.message, {
           duration: 1500,

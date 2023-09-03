@@ -24,7 +24,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (router.isReady) {
       axios
-        .get(`https://rekrut-server.vercel.app/user/profile/${router.query.id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${router.query.id}`)
         .then((response) => setProfiles(response.data.data[0]))
         .catch((error) => console.log(error));
     }
@@ -52,7 +52,7 @@ const EditProfile = () => {
       if (photo) {
         formData.append('photo', photo);
       }
-      axios.put(`https://rekrut-server.vercel.app/user/profilephoto/${router.query.id}`, formData, {
+      axios.put(`https://zany-ruby-whale-veil.cyclic.app/user/profilephoto/${router.query.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -147,7 +147,7 @@ const EditProfile = () => {
                 {!profiles.photo ? (
                   <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
                 ) : (
-                  <Image src={profiles?.photo} alt="avatar" height={200} width={200} className="m-auto" style={{borderRadius: '50%', width: '100'}} />
+                  <Image src={profiles?.photo} alt="avatar" height={200} width={200} className="m-auto" style={{borderRadius: '50%', width: '100', objectFit: 'cover'}} />
                 )}
               </div>
               <div className="card-body">

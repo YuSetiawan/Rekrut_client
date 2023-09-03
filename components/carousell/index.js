@@ -13,7 +13,7 @@ export default function Carousell() {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     axios
-      .get('https://rekrut-server.vercel.app/user/profile')
+      .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile`)
       .then((response) => setProfiles(response.data.data))
       .catch((error) => console.log(error));
   }, []);
@@ -65,7 +65,11 @@ export default function Carousell() {
             <SwiperSlide className="shadow" key={index}>
               <Card>
                 <div className="d-flex justify-content-center m-4">
-                  {!item.photo ? <Image src={userImg} height="250" width="250" alt="avatar" style={{borderRadius: '50%'}} /> : <Image src={item.photo} height={250} width={250} alt="avatar" style={{borderRadius: '50%'}} />}
+                  {!item.photo ? (
+                    <Image src={userImg} height="250" width="250" alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                  ) : (
+                    <Image src={item.photo} height={230} width={230} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                  )}
                 </div>
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>

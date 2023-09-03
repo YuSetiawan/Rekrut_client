@@ -25,7 +25,7 @@ export default function Login() {
   let onClick = (e) => {
     e.preventDefault();
     axios
-      .post('https://rekrut-server.vercel.app/user/login', data)
+      .post('https://zany-ruby-whale-veil.cyclic.app/user/login', data)
       .then((res) => {
         toast.success('Log in Successfull!', {
           duration: 1500,

@@ -3,7 +3,7 @@ import {toast} from 'react-hot-toast';
 
 export const getExperienceUser = (login) => async (dispatch) => {
   try {
-    const experiences = await axios.get(`https://rekrut-server.vercel.app/experience/profile/${login}`);
+    const experiences = await axios.get(`hhttps://zany-ruby-whale-veil.cyclic.app/experience/profile/${login}`);
     const result = experiences.data.data;
     dispatch({type: 'GET_ALL_EXPERIENCE_USER', payload: result});
   } catch (error) {
@@ -13,7 +13,7 @@ export const getExperienceUser = (login) => async (dispatch) => {
 
 export const createExperience = (experienceAction) => async (dispatch) => {
   try {
-    const experiences = await axios.post(`https://rekrut-server.vercel.app/experience/`, experienceAction);
+    const experiences = await axios.post(`hhttps://zany-ruby-whale-veil.cyclic.app/experience/`, experienceAction);
     const result = experiences.data.data;
     dispatch({type: 'CREATE_EXPERIENCE', payload: result});
     toast.success('Experience Created', {
@@ -34,7 +34,7 @@ export const createExperience = (experienceAction) => async (dispatch) => {
 
 export const updateExperience = (id, experienceAction, setShow) => async (dispatch) => {
   try {
-    const experiences = await axios.put(`https://rekrut-server.vercel.app/experience/${id}`, experienceAction);
+    const experiences = await axios.put(`hhttps://zany-ruby-whale-veil.cyclic.app/experience/${id}`, experienceAction);
     const result = experiences.data.data;
     setShow(false);
     dispatch({type: 'EDIT_EXPERIENCE', payload: result});
@@ -54,7 +54,7 @@ export const updateExperience = (id, experienceAction, setShow) => async (dispat
 
 export const deleteExperience = (exp_id, setShow) => async (dispatch) => {
   try {
-    const experiences = await axios.delete(`https://rekrut-server.vercel.app/experience/${id}`);
+    const experiences = await axios.delete(`hhttps://zany-ruby-whale-veil.cyclic.app/experience/${id}`);
     const result = experiences.data.data;
     setShow(false);
     toast.success('Experience Deleted', {

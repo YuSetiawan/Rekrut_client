@@ -107,10 +107,10 @@ export default function Home() {
           <div className="row mt-5 pt-5 ">
             <div className="col-md-6 d-flex align-items-center">
               <div>
-                <h1>Talenta terbaik negri untuk perubahan revolusi 4.0</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde vitae voluptatibus, magnam esse explicabo ipsum.</p>
+                <h1>The nation's best talent for revolutionary change 4.0</h1>
+                <p>Find professional experts in all fields of industry on this site</p>
                 <Link href="/home">
-                  <button className="button-home">Mulai dari sekarang</button>
+                  <button className="button-home">START FROM HERE</button>
                 </Link>
               </div>
             </div>
@@ -124,30 +124,30 @@ export default function Home() {
             </div>
             <div className="col-lg-6 d-flex align-items-center">
               <div>
-                <h2>Kenapa harus mencari talent di peworld</h2>
+                <h2>Why you should look for talent on Peworld?</h2>
                 <div className="mt-3">
                   <Image src={Ceklist} alt="ceklist" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>There are professionals from various fields.</span>
                 </div>
                 <div className="mt-3">
                   <Image src={Ceklist} alt="ceklist" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>From fresh graduates to experienced professionals.</span>
                 </div>
                 <div className="mt-3">
                   <Image src={Ceklist} alt="ceklist" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Existing record of work experience and a portfolio on the professional profile.</span>
                 </div>
                 <div className="mt-3">
                   <Image src={Ceklist} alt="ceklist" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Easy professional search access.</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="row mt-5 ">
             <div className="col-lg-5">
-              <h1>Skil talent</h1>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo rem, quo sunt aperiam aspernatur harum!</p>
+              <h1>Talent Skills</h1>
+              <p>Various expertise possessed by professional experts on this site!</p>
               <div className="mt-3">
                 <div className="row mt-3">
                   <div className="col">
@@ -156,7 +156,7 @@ export default function Home() {
                   </div>
                   <div className="col">
                     <Image src={Ceklist2} alt="ceklist" />
-                    <span>Golang</span>
+                    <span>Data Analyst</span>
                   </div>
                 </div>
                 <div className="row mt-3">
@@ -166,7 +166,7 @@ export default function Home() {
                   </div>
                   <div className="col">
                     <Image src={Ceklist2} alt="ceklist" />
-                    <span>C++</span>
+                    <span>Copywriting</span>
                   </div>
                 </div>
                 <div className="row mt-3">
@@ -176,7 +176,7 @@ export default function Home() {
                   </div>
                   <div className="col">
                     <Image src={Ceklist2} alt="ceklist" />
-                    <span>Ruby</span>
+                    <span>Photography</span>
                   </div>
                 </div>
                 <div className="row mt-3">
@@ -186,7 +186,7 @@ export default function Home() {
                   </div>
                   <div className="col">
                     <Image src={Ceklist2} alt="ceklist" />
-                    <span>10+ lainnya</span>
+                    <span>++ more skills</span>
                   </div>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function Home() {
           </div>
         </main>
         <div>
-          <h3 className="text-center my-5">Their Opinion</h3>
+          <h3 className="text-center my-5">Professionals on this site</h3>
           <div className="col-12 mb-5">
             <Carousell />
           </div>
@@ -206,12 +206,12 @@ export default function Home() {
         <div className="container mb">
           <div className="row py-5 text">
             <div className="col-lg-9 col-12">
-              <h2 className="text-light text-center">Jelajahi rekanan profesional anda.</h2>
+              <h2 className="text-light text-center">Explore your professional counterpart.</h2>
             </div>
             <div className="col-lg-3 mt-1">
               <div>
                 <Link href="/home">
-                  <button className="btn btn-light w-100">Mulai dari sekarang</button>
+                  <button className="btn btn-light w-100">START FROM HERE</button>
                 </Link>
               </div>
             </div>

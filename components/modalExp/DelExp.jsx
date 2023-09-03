@@ -12,7 +12,7 @@ function DeleteExperience({id}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:4000/experience/${id}`)
+      .delete(`https://zany-ruby-whale-veil.cyclic.app/experience/${id}`)
       .then((response) => {
         console.log(response);
         Swal.fire({
