@@ -140,7 +140,7 @@ const HomePage = () => {
         <div className="container ">
           {currentPosts
             .filter((item) => {
-              return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search) || item.job_position.toLowerCase().includes(search);
+              return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search);
             })
             .sort((a, b) => {
               switch (sortOption) {

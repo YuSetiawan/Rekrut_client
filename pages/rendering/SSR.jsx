@@ -126,6 +126,9 @@ const SSR = ({user}) => {
               <Dropdown.Item as="button" onClick={() => handleSort('name_desc')}>
                 Name Z-A
               </Dropdown.Item>
+              <Dropdown.Item as="button" onClick={() => handleSort('job_asc')}>
+                Job A-Z
+              </Dropdown.Item>
             </DropdownButton>
             <button className="button-home p-4" type="submit">
               Search
@@ -146,6 +149,8 @@ const SSR = ({user}) => {
                   return a.name.localeCompare(b.name);
                 case 'name_desc':
                   return b.name.localeCompare(a.name);
+                case 'job_asc':
+                  return a.job_position.localeCompare(b.job_position);
                 default:
                   return 0;
               }
