@@ -10,20 +10,26 @@ import axios from 'axios';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Pagination from '../../components/pagination/pagination';
+import {Skeleton} from '@mui/material';
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
   const [search, setSearch] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const [loading, isLoading] = useState(false);
   const handleSort = (option) => {
     setSortOption(option);
   };
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
+    isLoading(true);
     axios
       .get('https://zany-ruby-whale-veil.cyclic.app/user/profile')
-      .then((response) => setProfiles(response.data.data))
+      .then((response) => {
+        isLoading(false);
+        setProfiles(response.data.data);
+      })
       .catch((error) => console.log(error));
   }, []);
   const lastPostIndex = currentPage * postsPerPage;
@@ -137,66 +143,139 @@ const HomePage = () => {
       </section>
 
       <section className="mb-5">
-        <div className="container ">
-          {currentPosts
-            .filter((item) => {
-              return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search);
-            })
-            .sort((a, b) => {
-              switch (sortOption) {
-                case 'name_asc':
-                  return a.name.localeCompare(b.name);
-                case 'name_desc':
-                  return b.name.localeCompare(a.name);
-                // case 'job_asc':
-                //   return a.job_position.localeCompare(b.job_position);
-                default:
-                  return 0;
-              }
-            })
-            .map((profile, index) => (
-              <div className="card mb-3" key={index}>
+        {loading ? (
+          <>
+            <div className="container ">
+              <div className="card mb-3">
                 <div className="row g-0">
                   <div className="col-md-3 col-12 p-3 d-flex justify-content-center">
-                    {!profile.photo ? (
-                      <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
-                    ) : (
-                      <Image src={profile.photo} height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
-                    )}
+                    <Skeleton variant="circular" width={200} height={200} />
                   </div>
                   <div className="col-md-6">
                     <div className="container p-4">
-                      <h3>{profile.name}</h3>
-                      <p>{profile.job_position}</p>
-                      <p>{profile.phone}</p>
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
                       <div className="d-flex mb-3">
                         <div className="location">
-                          <Image src={Location} alt="location" className="mb-1" />
+                          <Skeleton variant="rounded" width={500} height={25} />
                         </div>
-                        <span>{!profile.location ? <p className="m-0">Location not added</p> : profile.location}</span>
                       </div>
-                      {profile.skills.map((item, index) => (
-                        <Button variant="warning" className="mb-2 mx-1" key={index}>
-                          {!item ? <p className="m-0 text-white">Skills not added </p> : item}
-                        </Button>
-                      ))}
+                      <Button variant="warning" className="mb-2 mx-1">
+                        <Skeleton variant="rounded" width={70} height={25} />
+                      </Button>
                     </div>
                   </div>
                   <div className="col-md-2 col-12 mt-4 text-center">
-                    {profile.role === 'worker' ? (
-                      <Link key={profile.id} href={`profile/${profile.id}`}>
-                        <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
-                      </Link>
-                    ) : (
-                      <Link key={profile.id} href={`profileRecruiter/${profile.id}`}>
-                        <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
-                      </Link>
-                    )}
+                    <Skeleton variant="rounded" width={150} height={25} />
                   </div>
                 </div>
               </div>
-            ))}
-        </div>
+            </div>
+            <div className="container ">
+              <div className="card mb-3">
+                <div className="row g-0">
+                  <div className="col-md-3 col-12 p-3 d-flex justify-content-center">
+                    <Skeleton variant="circular" width={200} height={200} />
+                  </div>
+                  <div className="col-md-6">
+                    <div className="container p-4">
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={500} height={25} />
+                      </p>
+                      <div className="d-flex mb-3">
+                        <div className="location">
+                          <Skeleton variant="rounded" width={500} height={25} />
+                        </div>
+                      </div>
+                      <Button variant="warning" className="mb-2 mx-1">
+                        <Skeleton variant="rounded" width={70} height={25} />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="col-md-2 col-12 mt-4 text-center">
+                    <Skeleton variant="rounded" width={150} height={25} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="container ">
+              {currentPosts
+                .filter((item) => {
+                  return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search) ? item : item.job_position.toLowerCase().includes(search);
+                })
+                .sort((a, b) => {
+                  switch (sortOption) {
+                    case 'name_asc':
+                      return a.name.localeCompare(b.name);
+                    case 'name_desc':
+                      return b.name.localeCompare(a.name);
+                    // case 'job_asc':
+                    //   return a.job_position.localeCompare(b.job_position);
+                    default:
+                      return 0;
+                  }
+                })
+                .map((profile, index) => (
+                  <div className="card mb-3" key={index}>
+                    <div className="row g-0">
+                      <div className="col-md-3 col-12 p-3 d-flex justify-content-center">
+                        {!profile.photo ? (
+                          <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
+                        ) : (
+                          <Image src={profile.photo} height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                        )}
+                      </div>
+                      <div className="col-md-6">
+                        <div className="container p-4">
+                          <h3>{profile.name}</h3>
+                          <p>{profile.job_position}</p>
+                          <p>{profile.phone}</p>
+                          <div className="d-flex mb-3">
+                            <div className="location">
+                              <Image src={Location} alt="location" className="mb-1" />
+                            </div>
+                            <span>{!profile.location ? <p className="m-0">Location not added</p> : profile.location}</span>
+                          </div>
+                          {profile.skills.map((item, index) => (
+                            <Button variant="warning" className="mb-2 mx-1" key={index}>
+                              {!item ? <p className="m-0 text-white">Skills not added </p> : item}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="col-md-2 col-12 mt-4 text-center">
+                        {profile.role === 'worker' ? (
+                          <Link key={profile.id} href={`profile/${profile.id}`}>
+                            <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
+                          </Link>
+                        ) : (
+                          <Link key={profile.id} href={`profileRecruiter/${profile.id}`}>
+                            <button className="button-home m-auto mt-lg-5 mb-5 p-4">See Profile</button>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
         <div className="container">
           <div className="text-center">
             <Pagination totalPosts={profiles.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />

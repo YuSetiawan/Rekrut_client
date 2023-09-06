@@ -27,8 +27,8 @@ export default function Login() {
     axios
       .post('https://zany-ruby-whale-veil.cyclic.app/user/login', data)
       .then((res) => {
-        toast.success('Log in Successfull!', {
-          duration: 1500,
+        toast(res.data.message, {
+          duration: 2500,
           position: 'top-center',
         });
         localStorage.setItem('token', res.data.data.token);
@@ -38,10 +38,6 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
-        toast.error('Email/Password incorrect', {
-          duration: 1500,
-          position: 'top-center',
-        });
       });
   };
 
