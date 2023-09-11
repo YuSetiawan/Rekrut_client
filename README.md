@@ -110,11 +110,11 @@ NEXT_PUBLIC_API = [BACKEND_URL]
 
    <tr>
     <td><img width="350px" src="/public/Apphoto Rek/rekrut-client-vercel-app-profile.png"  border="0" border="0" alt="1" /></td>
-    <td><img width="350px" src="/public/Apphoto Rek/rekrut-client-vercel-app-editProfile.png"  border="0" border="0" alt="2" /></td>
+    <td><img width="350px" src="https://cdn.discordapp.com/attachments/757600499359809556/1149743060629061653/image.png"  border="0" border="0" alt="2" /></td>
   </tr>
    <tr>
     <td>Worker Profile</td>
-    <td>Edit Worker Profile</td>
+    <td>Hire Worker</td>
   </tr>
 
 </table>
