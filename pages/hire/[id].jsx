@@ -93,7 +93,9 @@ const Hire = () => {
           router.push(`/profile/${router.query.id}`);
         }
       });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   return (
     <>
