@@ -16,7 +16,15 @@ const Hire = () => {
   const {id} = router.query;
 
   // GET Recruiter
-  const [login] = useState(localStorage.getItem('id'));
+  // const [login] = useState(localStorage.getItem('id'));
+  const [login, setLogin] = useState([]);
+  useEffect(() => {
+    if (router.isReady) {
+      const id = localStorage.getItem('id');
+      setLogin(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
 
   // GET ALL DATA
   const [profiles, setProfiles] = useState([]);
