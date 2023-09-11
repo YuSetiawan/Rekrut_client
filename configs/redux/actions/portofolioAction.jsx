@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
-export const getPortofolioUser = (login) => async (dispatch) => {
+export const getPortofolioUser = (id) => async (dispatch) => {
   try {
-    const portofolios = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/portofolio/profile/${login}`);
+    const portofolios = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/portofolio/profile/${id}`);
     const result = portofolios.data.data;
     dispatch({type: 'GET_ALL_PORTOFOLIO_USER', payload: result});
   } catch (err) {
@@ -25,9 +25,18 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    toast.success('Portofolio Created', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Portofolio Created',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     setTimeout(function () {
       window.location.reload();
@@ -37,9 +46,18 @@ export const createPortofolio = (portoAction, photo) => async (dispatch) => {
     window.location.reload();
   } catch (err) {
     console.log(err.message);
-    toast.error('Create Portofolio Failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Create Portofolio Failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };
@@ -49,9 +67,18 @@ export const deletePortofolio = (id, setShow) => async (dispatch) => {
     const portofolios = await axios.delete(`https://zany-ruby-whale-veil.cyclic.app/portofolio/${id}`);
     const result = portofolios.data.data;
     setShow(false);
-    toast.success('Portofolio Deleted', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Portofolio Deleted',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2500,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     dispatch({type: 'DELETE_PORTOFOLIO', payload: result});
     window.location.reload();
@@ -74,18 +101,36 @@ export const updatePortofolio = (id, portoAction, photo, setShow) => async (disp
       },
     });
     setShow(false);
-    toast.success('Portofolio Updated', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Portofolio Updated',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2500,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     setTimeout(function () {
       window.location.reload();
     }, 1000);
   } catch (err) {
     console.log(err.message);
-    toast.error('Update Portofolio Failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update Portofolio Failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
-export const getSkillUser = (login) => async (dispatch) => {
+export const getSkillUser = (id) => async (dispatch) => {
   try {
-    const skills = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/skill/profile/${login}`);
+    const skills = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/skill/profile/${id}`);
     const result = skills.data.data;
     dispatch({type: 'GET_ALL_SKILL_USER', payload: result});
   } catch (err) {
@@ -14,9 +14,18 @@ export const getSkillUser = (login) => async (dispatch) => {
 export const createSkill = (skillAction) => async (dispatch) => {
   try {
     const skills = await axios.post(`https://zany-ruby-whale-veil.cyclic.app/skill/`, skillAction);
-    toast.success('Skill Added', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Skill Added',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     setTimeout(function () {
       window.location.reload(1);
@@ -24,9 +33,18 @@ export const createSkill = (skillAction) => async (dispatch) => {
     const result = skills.data.data;
     dispatch({type: 'CREATE_SKILL', payload: result});
   } catch (err) {
-    toast.error('Submit skills incorrect', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Submit skills failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };
@@ -36,9 +54,18 @@ export const deleteSkill = (id, setShow) => async (dispatch) => {
     const skills = await axios.delete(`https://zany-ruby-whale-veil.cyclic.app/skill/${id}`);
     const result = skills.data.data;
     setShow(false);
-    toast.success('Skill Deleted', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Skill Deleted',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     dispatch({type: 'DELETE_SKILL', payload: result});
     window.location.reload();

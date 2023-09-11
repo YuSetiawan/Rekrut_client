@@ -23,16 +23,19 @@ export default function Footer() {
         <footer>
           <div className="container mt-5">
             <Image src={Logo} alt="logo" />
-            <div className="col-lg-4 my-3">
-              <p className="text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, quae perferendis dolore numquam consectetur ratione.</p>
+            <div className="col-lg-5 my-3">
+              <p className="text-light">
+                Find professional experts in all fields of industry on this site. <br />
+                Various expertise possessed by professional experts on this site!
+              </p>
             </div>
             <hr className="my-3" />
             <div className="row d-flex justify-content-between">
               <div className="col-lg-8">
-                <h6 className="text-light">2023 Pewworld. All right reserved</h6>
+                <h6 className="text-light">2023 Peworld. All right reserved</h6>
               </div>
               <div className="col-lg-4  text-light d-flex justify-content-end">
-                <p>Telepon</p>
+                <p>Phone</p>
                 <p className="mx-3">Email</p>
               </div>
             </div>

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
-export const getExperienceUser = (login) => async (dispatch) => {
+export const getExperienceUser = (id) => async (dispatch) => {
   try {
-    const experiences = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/experience/profile/${login}`);
+    const experiences = await axios.get(`https://zany-ruby-whale-veil.cyclic.app/experience/profile/${id}`);
     const result = experiences.data.data;
     dispatch({type: 'GET_ALL_EXPERIENCE_USER', payload: result});
   } catch (error) {
@@ -16,18 +16,36 @@ export const createExperience = (experienceAction) => async (dispatch) => {
     const experiences = await axios.post(`https://zany-ruby-whale-veil.cyclic.app/experience/`, experienceAction);
     const result = experiences.data.data;
     dispatch({type: 'CREATE_EXPERIENCE', payload: result});
-    toast.success('Experience Created', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Experience Created',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     setTimeout(function () {
       window.location.reload();
     }, 1000);
   } catch (error) {
     console.log(error.message);
-    toast.error('Create Experience Failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Create Experience Failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };
@@ -38,16 +56,34 @@ export const updateExperience = (id, experienceAction, setShow) => async (dispat
     const result = experiences.data.data;
     setShow(false);
     dispatch({type: 'EDIT_EXPERIENCE', payload: result});
-    toast.success('Experience Updated', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Experience Updated',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     window.location.reload();
   } catch (err) {
     console.log(err.message);
-    toast.error('Update Experience Failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update Experience Failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };
@@ -57,9 +93,18 @@ export const deleteExperience = (exp_id, setShow) => async (dispatch) => {
     const experiences = await axios.delete(`https://zany-ruby-whale-veil.cyclic.app/experience/${id}`);
     const result = experiences.data.data;
     setShow(false);
-    toast.success('Experience Deleted', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Experience deleted',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     dispatch({type: 'DELETE_EXPERIENCE', payload: result});
     window.location.reload();

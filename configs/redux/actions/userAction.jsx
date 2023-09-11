@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 export const getAllUser = () => async (dispatch) => {
   try {
@@ -11,24 +11,42 @@ export const getAllUser = () => async (dispatch) => {
   }
 };
 
-export const editUser = (login, userAction) => async (dispatch) => {
+export const editUser = (id, userAction) => async (dispatch) => {
   try {
-    const users = await axios.put(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${login}`, userAction);
+    const users = await axios.put(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${id}`, userAction);
     const result = users.data.data;
     console.log(result);
-    toast.success('Update data profile succes', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update data profile succes',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
-    // setTimeout(function () {
-    //   window.location.reload(1);
-    // }, 1000);
+    setTimeout(function () {
+      window.location.reload(1);
+    }, 1000);
     dispatch({type: 'EDIT_USER', payload: result});
   } catch (err) {
     console.log(err.message);
-    toast.error('Update data profile failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update data profile failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };
@@ -40,17 +58,35 @@ export const editPhotoUser = (id, photo) => async (dispatch) => {
     const workers = await axios.put(`https://zany-ruby-whale-veil.cyclic.app/user/profilephoto/${id}`, formData);
     const result = workers.data.data[0];
     console.log(result);
-    toast.success('Update image profile succes', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update image profile succes',
+      showConfirmButton: false,
+      icon: 'success',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
     // window.location.reload();
     dispatch({type: 'EDIT_USER_PHOTO', payload: result});
   } catch (err) {
     console.log(err.message);
-    toast.error('Update image profile failed', {
-      duration: 1500,
-      position: 'top-center',
+    Swal.fire({
+      title: 'Update image profile failed',
+      showConfirmButton: false,
+      icon: 'error',
+      target: '#custom-target',
+      timer: 2000,
+      timerProgressBar: true,
+      customClass: {
+        container: 'position-absolute',
+      },
+      toast: true,
+      position: 'bottom-right',
     });
   }
 };

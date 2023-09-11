@@ -12,16 +12,10 @@ import {createExperience, getExperienceUser} from '../../configs/redux/actions/e
 import {createSkill, getSkillUser} from '../../configs/redux/actions/skillActions';
 import {createPortofolio, getPortofolioUser} from '../../configs/redux/actions/portofolioAction';
 import {editUser} from '../../configs/redux/actions/userAction';
-import {Toaster} from 'react-hot-toast';
 
-const FormEdit = ({name, job_position, location, description}) => {
+const FormEdit = ({id, name, job_position, location, description}) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [login, setLogin] = useState();
-  useEffect(() => {
-    const id = localStorage.getItem('id');
-    setLogin(id);
-  }, []);
 
   // GET ALL DATA
   const {skillUser} = useSelector((state) => state.skill);
@@ -29,16 +23,16 @@ const FormEdit = ({name, job_position, location, description}) => {
   const {portofolioUser} = useSelector((state) => state.portofolio);
   useEffect(() => {
     if (router.isReady) {
-      dispatch(getSkillUser(login));
-      dispatch(getExperienceUser(login));
-      dispatch(getPortofolioUser(login));
+      dispatch(getSkillUser(id));
+      dispatch(getExperienceUser(id));
+      dispatch(getPortofolioUser(id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // POST & PUT DATA
   const [userAction, setUserAction] = useState({
-    id: {login},
+    id: {id},
     name,
     job_position,
     location,
@@ -46,7 +40,7 @@ const FormEdit = ({name, job_position, location, description}) => {
   });
   const [skillAction, setSkillAction] = useState({
     skill_name: '',
-    id_users: {login},
+    id_users: {id},
   });
   const [experienceAction, setExperienceAction] = useState({
     job_position: '',
@@ -54,13 +48,13 @@ const FormEdit = ({name, job_position, location, description}) => {
     working_started: '',
     working_ended: '',
     description: '',
-    id_users: {login},
+    id_users: {id},
   });
   const [portoAction, setPortoAction] = useState({
     name: '',
     repository: '',
     photo: '',
-    id_users: {login},
+    id_users: {id},
   });
 
   const [preview, setPreview] = useState(null);
@@ -97,7 +91,7 @@ const FormEdit = ({name, job_position, location, description}) => {
   };
 
   const handlePutUser = () => {
-    dispatch(editUser(login, userAction));
+    dispatch(editUser(id, userAction));
   };
 
   const handleSubmitSkills = (e) => {
@@ -183,26 +177,26 @@ const FormEdit = ({name, job_position, location, description}) => {
           <label htmlFor="validationDefault01" className="form-label">
             Full name
           </label>
-          <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your name" name="id " value={(userAction.id = login)} onChange={handleChangeUser} required />
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Your name" name="name" value={userAction.name} onChange={handleChangeUser} required />
+          <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your name" name="id " value={(userAction.id = id)} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder="Your name" name="name" value={userAction.name || name} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Job desk
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Web developer" name="job_position" value={userAction.job_position} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder="Web developer" name="job_position" value={userAction.job_position || job_position} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Location
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Sudirman" name="location" value={userAction.location} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder="Sudirman" name="location" value={userAction.location || location} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Description
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="About you" name="description" value={userAction.description} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder="About you" name="description" value={userAction.description || description} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <button className="button-home w-100 my-3" type="submit">
@@ -230,7 +224,7 @@ const FormEdit = ({name, job_position, location, description}) => {
           </label>
           <form onSubmit={handleSubmitSkills}>
             <input type="text" className="form-control col-8" id="validationDefault01" placeholder="React JS" name="skill_name" value={skillAction.skill_name} onChange={handleChangeSkills} required />
-            <input type="hidden" className="form-control col-8" id="validationDefault01" placeholder="React JS" name="id_users" value={(skillAction.id_users = login)} onChange={handleChangeSkills} required />
+            <input type="hidden" className="form-control col-8" id="validationDefault01" placeholder="React JS" name="id_users" value={(skillAction.id_users = id)} onChange={handleChangeSkills} required />
             <div className="col-12">
               <button className="button-home w-100 my-3" type="submit">
                 Submit
@@ -274,7 +268,7 @@ const FormEdit = ({name, job_position, location, description}) => {
               <label htmlFor="validationDefault01" className="form-label">
                 Company name
               </label>
-              <input type="hidden" className="form-control" id="validationDefault01" name="id_users" value={(experienceAction.id_users = login)} onChange={handleChangeExperience} required />
+              <input type="hidden" className="form-control" id="validationDefault01" name="id_users" value={(experienceAction.id_users = id)} onChange={handleChangeExperience} required />
               <input type="text" className="form-control" id="validationDefault01" placeholder="Succes Corp" name="company_name" value={experienceAction.company_name} onChange={handleChangeExperience} required />
             </div>
             <div className="col-lg-3 col-6 mt-2 mt-lg-0">
@@ -329,7 +323,7 @@ const FormEdit = ({name, job_position, location, description}) => {
             <label htmlFor="validationDefault01" className="form-label">
               Portofolio name
             </label>
-            <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your portofolio name" name="id_users" value={(portoAction.id_users = login)} onChange={handleChangePortofolio} required />
+            <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your portofolio name" name="id_users" value={(portoAction.id_users = id)} onChange={handleChangePortofolio} required />
             <input type="text" className="form-control" id="validationDefault01" placeholder="Your portofolio name" name="name" value={portoAction.name} onChange={handleChangePortofolio} required />
           </div>
           <div className="col-12">
@@ -351,7 +345,6 @@ const FormEdit = ({name, job_position, location, description}) => {
             </button>
           </div>{' '}
         </form>
-        <Toaster />
       </section>
     </>
   );

@@ -1,30 +1,30 @@
 import {useRouter} from 'next/router';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Footer from '../../components/footer';
 import Navbar from '../../components/navbar';
-import {useEffect} from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import profImg from '../../public/image/user.png';
 import Location from '../../public/image/location.png';
 import Email from '../../public/image/mail-icon.png';
-import Instagram from '../../public/image/instagram-icon.png';
-import Github from '../../public/image/github-icon.png';
 import Button from 'react-bootstrap/Button';
 import {Skeleton} from '@mui/material';
-import Link from 'next/link';
+import Swal from 'sweetalert2';
 
-const Profile = () => {
+const Hire = () => {
   const router = useRouter();
   const {id} = router.query;
 
+  // GET Recruiter
+  const [login] = useState(localStorage.getItem('id'));
+
   // GET ALL DATA
   const [profiles, setProfiles] = useState([]);
+  const [recruiter, setRecruiter] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [experience, setExperience] = useState([]);
-  const [portofolio, setPortofolio] = useState([]);
   const [loading, isLoading] = useState(false);
 
+  // Profile page
   useEffect(() => {
     isLoading(true);
     if (router.isReady) {
@@ -43,22 +43,58 @@ const Profile = () => {
         })
         .catch((error) => console.log(error));
       axios
-        .get(`https://zany-ruby-whale-veil.cyclic.app/experience/profile/${id}`)
+        .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${login}`)
         .then((response) => {
-          setExperience(response.data.data);
-          isLoading(false);
-        })
-        .catch((error) => console.log(error));
-      axios
-        .get(`https://zany-ruby-whale-veil.cyclic.app/portofolio/profile/${id}`)
-        .then((response) => {
-          setPortofolio(response.data.data);
+          setRecruiter(response.data.data[0]);
           isLoading(false);
         })
         .catch((error) => console.log(error));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
+
+  // POST OFFERING
+  const [data, setData] = useState({
+    offering: '',
+    description: '',
+    worker_name: '',
+    worker_id: '',
+    worker_email: '',
+    rec_id: '',
+    rec_company: '',
+    rec_email: '',
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitHire = (e) => {
+    e.preventDefault();
+    try {
+      axios.post(`https://zany-ruby-whale-veil.cyclic.app/hire`, data).then((res) => {
+        if (res.data.statusCode === 201) {
+          Swal.fire({
+            title: "Your offer message has been sent to this person's email",
+            showConfirmButton: false,
+            icon: 'success',
+            target: '#custom-target',
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+              container: 'position-absolute',
+            },
+            toast: true,
+            position: 'bottom-right',
+          });
+          router.push(`/profile/${router.query.id}`);
+        }
+      });
+    } catch (err) {}
+  };
   return (
     <>
       <style jsx>{`
@@ -161,7 +197,7 @@ const Profile = () => {
                         <Skeleton variant="rounded" width={80} height={25} />
                       </Button>
                     </div>
-                    <Skeleton variant="rounded" width="90%" height={35} />
+                    <button className="button-home p-4 w-100 my-3">Hire</button>
                     <div>
                       <div className="d-flex my-3">
                         <Skeleton variant="rounded" width="100%" height={25} />
@@ -212,9 +248,6 @@ const Profile = () => {
                         </>
                       ))}
                     </div>
-                    <Link href={`/hire/${profiles.id}`}>
-                      <button className="button-home p-4 w-100 my-3">Hire this professional</button>
-                    </Link>
                     <div>
                       <div className="d-flex my-3">
                         <div className="location col-2">
@@ -223,16 +256,7 @@ const Profile = () => {
                         <p>{profiles.email}</p>
                       </div>
                       <div className="d-flex my-3">
-                        <div className="location col-2">
-                          <Image src={Instagram} alt="location" className="mb-1" />
-                        </div>
-                        <p>@{profiles.name}</p>
-                      </div>
-                      <div className="d-flex my-3">
-                        <div className="location col-2">
-                          <Image src={Github} alt="location" className="mb-1" />
-                        </div>
-                        <p>@{profiles.name}</p>
+                        <h5>There is a form on the right side of this page to send an email to the experts you want to recruit to your company</h5>
                       </div>
                     </div>
                   </div>
@@ -243,89 +267,44 @@ const Profile = () => {
           <div className="col-lg-8 col-12">
             <div className="card p-3 shadow">
               <>
-                <nav>
-                  <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button className="nav-link active" id="nav-Portofolio-tab" data-bs-toggle="tab" data-bs-target="#nav-Portofolio" type="button" role="tab" aria-controls="nav-Portofolio" aria-selected="true">
-                      <h4>Portofolio</h4>
-                    </button>
-                    <button className="nav-link" id="nav-Experience-tab" data-bs-toggle="tab" data-bs-target="#nav-Experience" type="button" role="tab" aria-controls="nav-Experience" aria-selected="false">
-                      <h4>Experience</h4>
-                    </button>
-                  </div>
-                </nav>
-                <div className="tab-content" id="nav-tabContent">
-                  <div className="tab-pane fade show active p-3" id="nav-Portofolio" role="tabpanel" aria-labelledby="nav-Portofolio-tab">
-                    <div className="row p-lg-0 p-4">
-                      {loading ? (
-                        <>
-                          <div className="col-lg-4 col-12 my-2 text-center">
-                            <Skeleton variant="rounded" width="100%" height={150} />
-                            <div className="card-body">
-                              <h3 className="card-title">
-                                {' '}
-                                <Skeleton variant="rounded" width="100%" height={40} />
-                              </h3>
-                              <h5 className="card-text">
-                                <Skeleton variant="rounded" width="100%" height={40} />
-                              </h5>
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          {portofolio.map((item, index) => (
-                            <div className="col-lg-4 col-12 my-2 text-center" key={index}>
-                              <Image src={item.photo} alt="portImg" height={150} width={220} className="m-auto m-lg-0 mt-3" style={{objectFit: 'cover'}} />
-                              <div className="card-body">
-                                <h3 className="card-title">{item.name}</h3>
-                                <h5 className="card-text">{item.repository}</h5>{' '}
-                              </div>
-                            </div>
-                          ))}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="tab-pane fade p-3" id="nav-Experience" role="tabpanel" aria-labelledby="nav-Experience-tab">
+                <div>
+                  <div className=" p-3">
                     <div>
                       {loading ? (
                         <>
-                          <div className="card container my-3">
-                            <div className="row p-3">
-                              <div className="col-12">
-                                <h3 className="card-title">
-                                  <Skeleton variant="rounded" width="100%" height={50} />
-                                </h3>
-                                <h5 className="card-text">
-                                  <Skeleton variant="rounded" width="100%" height={30} />
-                                </h5>
-                                <p className="mt-3">
-                                  <Skeleton variant="rounded" width="100%" height={25} />
-                                </p>
-                                <p className="description">
-                                  <Skeleton variant="rounded" width="100%" height={25} />
-                                </p>
-                              </div>
-                            </div>
+                          <div className="container my-3">
+                            <Skeleton variant="rounded" width="100%" height={390} />
                           </div>
                         </>
                       ) : (
-                        <>
-                          {experience.map((item, index) => (
-                            <div className="card container my-3" key={index}>
-                              <div className="row p-3">
-                                <div className="col-12">
-                                  <h3 className="card-title">{item.job_position}</h3>
-                                  <h5 className="card-text">{item.company_name}</h5>
-                                  <p className="mt-3">
-                                    <i>from</i> {item.working_started} <i>to</i> {item.working_ended}
-                                  </p>
-                                  <p className="description">{item.description}</p>
+                        <div className="container my-3">
+                          <div className="row p-3">
+                            <div className="col-12">
+                              <h3 className="card-title">Contact {profiles.name}</h3>
+                              <p className="card-text">Fill in this form to send an email to {profiles.name} email as a sign of your interest in recruiting him as a professional expert into your company </p>
+                              <form onSubmit={handleSubmitHire}>
+                                <div>
+                                  <label htmlFor="offering">Position you are offering</label>
+                                  <input type="text" className="form-control mt-1" placeholder="Input the offering" name="offering" value={data.offering} onChange={handleChange} required />
                                 </div>
-                              </div>
+                                <div className="mt-3">
+                                  <label htmlFor="description">Brief description</label>
+                                  <textarea className="form-control mt-1" placeholder="Input your description" name="description" value={data.description} onChange={handleChange} required />
+                                </div>
+                                {/* Hidden Form */}
+                                <input type="hidden" name="worker_id" value={(data.worker_id = profiles.id)} onChange={handleChange} />
+                                <input type="hidden" name="worker_name" value={(data.worker_name = profiles.name)} onChange={handleChange} />
+                                <input type="hidden" name="worker_email" value={(data.worker_email = profiles.email)} onChange={handleChange} />
+                                <input type="hidden" name="rec_id" value={(data.rec_id = recruiter.id)} onChange={handleChange} />
+                                <input type="hidden" name="rec_company" value={(data.rec_company = `${recruiter.name} at ${recruiter.company_name}`)} onChange={handleChange} />
+                                <input type="hidden" name="rec_email" value={(data.rec_email = recruiter.email)} onChange={handleChange} />
+                                <button type="submit" className="button-home p-4 w-100 my-3">
+                                  Send this offer
+                                </button>
+                              </form>
                             </div>
-                          ))}
-                        </>
+                          </div>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -340,4 +319,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Hire;

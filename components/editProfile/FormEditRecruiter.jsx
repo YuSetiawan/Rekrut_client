@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {editUser} from '../../configs/redux/actions/userAction';
 
-const FormEditRecruiter = () => {
+const FormEditRecruiter = ({id, name, location, job_position, description}) => {
   const dispatch = useDispatch();
-  const [login, setLogin] = useState();
-  useEffect(() => {
-    const id = localStorage.getItem('id');
-    setLogin(id);
-  }, []);
 
   // POST & PUT DATA
   const [userAction, setUserAction] = useState({
-    id: {login},
+    id: {id},
     name: '',
     job_position: '',
     location: '',
@@ -27,7 +22,7 @@ const FormEditRecruiter = () => {
   };
 
   const handlePutUser = () => {
-    dispatch(editUser(login, userAction));
+    dispatch(editUser(id, userAction));
   };
 
   return (
@@ -99,26 +94,26 @@ const FormEditRecruiter = () => {
           <label htmlFor="validationDefault01" className="form-label">
             Full name
           </label>
-          <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your name" name="id " value={(userAction.id = login)} onChange={handleChangeUser} required />
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Your name" name="name" value={userAction.name} onChange={handleChangeUser} required />
+          <input type="hidden" className="form-control" id="validationDefault01" placeholder="Your name" name="id " value={(userAction.id = id)} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder={name} name="name" value={userAction.name} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Job desk
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Web developer" name="job_position" value={userAction.job_position} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder={job_position} name="job_position" value={userAction.job_position} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Location
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="Sudirman" name="location" value={userAction.location} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder={location} name="location" value={userAction.location} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <label htmlFor="validationDefault01" className="form-label">
             Description
           </label>
-          <input type="text" className="form-control" id="validationDefault01" placeholder="About you" name="description" value={userAction.description} onChange={handleChangeUser} required />
+          <input type="text" className="form-control" id="validationDefault01" placeholder={description} name="description" value={userAction.description} onChange={handleChangeUser} required />
         </div>
         <div className="col-12">
           <button className="button-home w-100 my-3" type="submit">

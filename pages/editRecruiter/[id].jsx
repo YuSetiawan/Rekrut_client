@@ -63,8 +63,17 @@ const EditProfileRecruiter = () => {
         },
       });
       Swal.fire({
-        icon: 'success',
         title: 'Update Profile Photo Success',
+        showConfirmButton: false,
+        icon: 'success',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
       });
       setTimeout(function () {
         window.location.reload();
@@ -72,8 +81,17 @@ const EditProfileRecruiter = () => {
     } catch (error) {
       console.log(error.message);
       Swal.fire({
-        icon: 'error',
         title: 'Update Profile Photo failed',
+        showConfirmButton: false,
+        icon: 'error',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
       });
     }
   };
@@ -186,7 +204,7 @@ const EditProfileRecruiter = () => {
           </div>{' '}
           <div className="col-lg-8 col-12 ">
             <div className="p-3">
-              <FormEditRecruiter id={login} />
+              <FormEditRecruiter id={router.query.id} name={profiles.name} job_position={profiles.job_position} location={profiles.location} description={profiles.description} />
             </div>
           </div>
         </div>

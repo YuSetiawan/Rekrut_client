@@ -8,22 +8,26 @@ import Image from 'next/image';
 import profImg from '../../public/image/user.png';
 import Location from '../../public/image/location.png';
 import Email from '../../public/image/mail-icon.png';
-import Instagram from '../../public/image/instagram-icon.png';
 import Github from '../../public/image/github-icon.png';
 import Gitlab from '../../public/image/gitlab-icon.png';
-import Link from 'next/link';
+import {Divider, Skeleton} from '@mui/material';
 
 const ProfileRecruiter = () => {
   const router = useRouter();
   const {id} = router.query;
 
   // GET ALL DATA
+  const [loading, isLoading] = useState(false);
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
+    isLoading(true);
     if (router.isReady) {
       axios
         .get(`https://zany-ruby-whale-veil.cyclic.app/user/profile/${id}`)
-        .then((response) => setProfiles(response.data.data[0]))
+        .then((response) => {
+          setProfiles(response.data.data[0]);
+          isLoading(false);
+        })
         .catch((error) => console.log(error));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,52 +103,105 @@ const ProfileRecruiter = () => {
         <div className="mb-5">
           <div className="col-12">
             <div className="card p-2 mb-4 shadow">
-              {!profiles.photo ? (
-                <Image src={profImg} className="m-auto my-3" height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
+              {loading ? (
+                <center>
+                  <Skeleton variant="circular" width={200} height={200} />
+                  <center className="d-flex mt-2">
+                    <center className=" m-auto col-12">
+                      <p>
+                        <Skeleton variant="rounded" width={200} height={50} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={250} height={25} />
+                      </p>
+                      <p>
+                        <Skeleton variant="rounded" width={200} height={25} />
+                      </p>
+                    </center>
+                  </center>
+                  <center className="d-flex">
+                    <center className=" m-auto col-12">
+                      <>
+                        <Skeleton variant="rounded" width={200} height={25} />
+                      </>
+                    </center>
+                  </center>
+                  <p className="descriptionWorker my-3">
+                    <Skeleton variant="rounded" width={350} height={25} />
+                  </p>
+                  <Divider>Socials</Divider>
+                  <div>
+                    <div className="d-flex my-3">
+                      <div className="location col-2">
+                        <Image src={Email} alt="location" className="mb-1" />
+                      </div>
+                      <p>
+                        {' '}
+                        <Skeleton variant="rounded" width={200} height={25} />
+                      </p>
+                    </div>
+                    <div className="d-flex my-3">
+                      <div className="location col-2">
+                        <Image src={Github} alt="location" className="mb-1" />
+                      </div>
+                      <p>
+                        {' '}
+                        <Skeleton variant="rounded" width={200} height={25} />
+                      </p>
+                    </div>
+                    <div className="d-flex my-3">
+                      <div className="location col-2">
+                        <Image src={Gitlab} alt="location" className="mb-1" />
+                      </div>
+                      <p>
+                        {' '}
+                        <Skeleton variant="rounded" width={200} height={25} />
+                      </p>
+                    </div>
+                  </div>
+                </center>
               ) : (
-                <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                <>
+                  {!profiles.photo ? (
+                    <Image src={profImg} className="m-auto my-3" height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
+                  ) : (
+                    <Image src={profiles.photo} className="m-auto my-3" height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                  )}
+                  <div className="card-body text-center">
+                    <h3>{profiles.company_name}</h3>
+                    <h5>{profiles.job_position}</h5>
+                    <p>{profiles.name}</p>
+                    <div className="d-flex">
+                      <div className=" m-auto col-12">
+                        <Image src={Location} alt="location" className="mb-1 " />
+                        <>{!profiles.location ? <p className="m-0">Location not added</p> : profiles.location}</>
+                      </div>
+                    </div>
+                    <p className="descriptionWorker mb-4">{profiles.description}</p>
+                    <Divider>Socials</Divider>
+                    <div>
+                      <div className="d-flex my-3">
+                        <div className="location col-2">
+                          <Image src={Email} alt="location" className="mb-1" />
+                        </div>
+                        <p> {profiles.email}</p>
+                      </div>
+                      <div className="d-flex my-3">
+                        <div className="location col-2">
+                          <Image src={Github} alt="location" className="mb-1" />
+                        </div>
+                        <p> @{profiles.name}</p>
+                      </div>
+                      <div className="d-flex my-3">
+                        <div className="location col-2">
+                          <Image src={Gitlab} alt="location" className="mb-1" />
+                        </div>
+                        <p> @{profiles.name}</p>
+                      </div>
+                    </div>
+                  </div>
+                </>
               )}
-              <div className="card-body text-center">
-                <h3>{profiles.company_name}</h3>
-                <h5>{profiles.job_position}</h5>
-                <p>{profiles.name}</p>
-                <div className="d-flex">
-                  <div className=" m-auto col-12">
-                    <Image src={Location} alt="location" className="mb-1 " />
-                    <>{!profiles.location ? <p className="m-0">Location not added</p> : profiles.location}</>
-                  </div>
-                </div>
-                <p className="descriptionWorker mb-4">{profiles.description}</p>
-                <Link href={`/home`}>
-                  <button className="button-home p-4 w-100 my-3">Hiring</button>
-                </Link>
-                <div>
-                  <div className="d-flex my-3">
-                    <div className="location col-2">
-                      <Image src={Email} alt="location" className="mb-1" />
-                    </div>
-                    <p> Email</p>
-                  </div>
-                  <div className="d-flex my-3">
-                    <div className="location col-2">
-                      <Image src={Instagram} alt="location" className="mb-1" />
-                    </div>
-                    <p> Instagram</p>
-                  </div>
-                  <div className="d-flex my-3">
-                    <div className="location col-2">
-                      <Image src={Github} alt="location" className="mb-1" />
-                    </div>
-                    <p> Github</p>
-                  </div>
-                  <div className="d-flex my-3">
-                    <div className="location col-2">
-                      <Image src={Gitlab} alt="location" className="mb-1" />
-                    </div>
-                    <p> Gitlab</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>{' '}
         </div>

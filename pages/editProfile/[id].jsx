@@ -9,7 +9,7 @@ import Location from '../../public/image/location.png';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Link from 'next/link';
-import {Toaster, toast} from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -57,18 +57,36 @@ const EditProfile = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast.success('Update photo profile succes', {
-        duration: 1500,
-        position: 'top-center',
+      Swal.fire({
+        title: 'Update photo profile succes',
+        showConfirmButton: false,
+        icon: 'success',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
       });
       setTimeout(function () {
         window.location.reload();
       }, 1000);
     } catch (error) {
       console.log(error.message);
-      toast.error('Update photo failed', {
-        duration: 1500,
-        position: 'top-center',
+      Swal.fire({
+        title: 'Update photo failed',
+        showConfirmButton: false,
+        icon: 'error',
+        target: '#custom-target',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          container: 'position-absolute',
+        },
+        toast: true,
+        position: 'bottom-right',
       });
     }
   };
@@ -145,9 +163,9 @@ const EditProfile = () => {
             <div className="card p-2 mb-4">
               <div className="text-center my-3">
                 {!profiles.photo ? (
-                  <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
+                  <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%', border: '5px solid #FFBF00'}} />
                 ) : (
-                  <Image src={profiles?.photo} alt="avatar" height={200} width={200} className="m-auto" style={{borderRadius: '50%', width: '100', objectFit: 'cover'}} />
+                  <Image src={profiles?.photo} alt="avatar" height={200} width={200} className="m-auto" style={{borderRadius: '50%', border: '5px solid #FFBF00', objectFit: 'cover'}} />
                 )}
               </div>
               <div className="card-body">
@@ -181,12 +199,11 @@ const EditProfile = () => {
           </div>{' '}
           <div className="col-lg-8 col-12 ">
             <div className="p-3">
-              <FormEdit id={login} name={profiles.name} job_position={profiles.job_position} location={profiles.location} description={profiles.description} />
+              <FormEdit id={router.query.id} name={profiles.name} job_position={profiles.job_position} location={profiles.location} description={profiles.description} />
             </div>
           </div>
         </div>
       </div>
-      <Toaster />
       <Footer />
     </>
   );

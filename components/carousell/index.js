@@ -93,9 +93,9 @@ export default function Carousell() {
                   <Card>
                     <div className="d-flex justify-content-center m-4">
                       {!item.photo ? (
-                        <Image src={userImg} height="250" width="250" alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                        <Image src={userImg} height="230" width="230" alt="avatar" style={{borderRadius: '50%', objectFit: 'cover', border: '5px solid #FFBF00'}} />
                       ) : (
-                        <Image src={item.photo} height={230} width={230} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                        <Image src={item.photo} height={230} width={230} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover', border: '5px solid #FFBF00'}} />
                       )}
                     </div>
                     <Card.Body>

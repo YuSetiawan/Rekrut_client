@@ -236,9 +236,9 @@ const HomePage = () => {
                     <div className="row g-0">
                       <div className="col-md-3 col-12 p-3 d-flex justify-content-center">
                         {!profile.photo ? (
-                          <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%'}} />
+                          <Image src={defaultPhoto} height="200" width="200" alt="avatar" style={{borderRadius: '50%', border: '5px solid #FFBF00'}} />
                         ) : (
-                          <Image src={profile.photo} height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover'}} />
+                          <Image src={profile.photo} height={200} width={200} alt="avatar" style={{borderRadius: '50%', objectFit: 'cover', border: '5px solid #FFBF00'}} />
                         )}
                       </div>
                       <div className="col-md-6">
