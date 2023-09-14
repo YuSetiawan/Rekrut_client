@@ -16,12 +16,27 @@ const Hire = () => {
   const {id} = router.query;
 
   // GET Recruiter
-  // const [login] = useState(localStorage.getItem('id'));
   const [login, setLogin] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       const id = localStorage.getItem('id');
-      setLogin(id);
+      if (!id) {
+        Swal.fire({
+          title: 'You must log in first before using this feature',
+          showConfirmButton: false,
+          target: '#custom-target',
+          timer: 4000,
+          timerProgressBar: true,
+          customClass: {
+            container: 'position-absolute',
+          },
+          toast: true,
+          position: 'top',
+        });
+        router.push(`/login`);
+      } else {
+        setLogin(id);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
