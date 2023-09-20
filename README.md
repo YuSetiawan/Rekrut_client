@@ -18,7 +18,6 @@
 
 - [Table of Contents](#table-of-contents)
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -91,8 +90,8 @@ NEXT_PUBLIC_API = [BACKEND_URL]
 
 <table>
  <tr>
-    <td><img width="350px" src="/public/Apphoto Rek/rekrut-client-vercel-app-register.png"  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="/public/Apphoto Rek/login.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="450px" src="/public/Apphoto Rek/rekrut-client-vercel-app-register.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="450px" src="/public/Apphoto Rek/login.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
    <tr>
     <td>Register</td>
@@ -100,8 +99,8 @@ NEXT_PUBLIC_API = [BACKEND_URL]
   </tr>
   
   <tr>
-    <td><img width="350px" src="/public/Apphoto Rek/home.png"  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="/public/Apphoto Rek/search.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="450px" src="https://cdn.discordapp.com/attachments/1066029493287919706/1153958479086764062/image.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="450px" src="https://cdn.discordapp.com/attachments/1066029493287919706/1153958083148656650/image.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
    <tr>
     <td>Landing Page</td>
@@ -109,14 +108,29 @@ NEXT_PUBLIC_API = [BACKEND_URL]
   </tr>
 
    <tr>
-    <td><img width="350px" src="/public/Apphoto Rek/rekrut-client-vercel-app-profile.png"  border="0" border="0" alt="1" /></td>
-    <td><img width="350px" src="https://cdn.discordapp.com/attachments/757600499359809556/1149743060629061653/image.png"  border="0" border="0" alt="2" /></td>
+    <td><img width="450px" src="/public/Apphoto Rek/rekrut-client-vercel-app-profile.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="450px" src="https://cdn.discordapp.com/attachments/757600499359809556/1149743060629061653/image.png"  border="0" border="0" alt="2" /></td>
   </tr>
    <tr>
     <td>Worker Profile</td>
     <td>Hire Worker</td>
   </tr>
-
+   <tr>
+    <td><img width="450px" src="https://media.discordapp.net/attachments/1066029493287919706/1153955512996601866/image.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="450px" src="https://cdn.discordapp.com/attachments/1066029493287919706/1153955513520902174/image.png"  border="0" border="0" alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Email Verification Format</td>
+    <td>Hire Mailed Format</td>
+  </tr>
+   <tr>
+    <td><img width="450px" src="https://cdn.discordapp.com/attachments/1066029493287919706/1153955788990185472/image.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="450px" src="https://cdn.discordapp.com/attachments/1066029493287919706/1153957263615197225/image.png"  border="0" border="0" alt="1" /></td>
+  </tr>
+   <tr>
+    <td>Edit Profile ( Worker )</td>
+    <td>Edit Profile ( Recruiter )</td>
+  </tr>
 </table>
 <!-- CONTRIBUTING -->
 
